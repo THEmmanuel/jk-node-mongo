@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const {
 	MONGO_URI
 } = require('./config');
-// const postsRoutes = require('./routes/posts_controller');
+const postsRoutes = require('./routes/posts_controller');
 const apiRoutes = require('./api-routes');
 
 const app = express();
@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
-app.use(bodyParser.json());
-// app.use(express.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.connect(MONGO_URI, {
 		useNewUrlParser: true,
@@ -22,7 +22,7 @@ mongoose.connect(MONGO_URI, {
 	.then(() => console.log('MongoDB connected!'))
 	.catch(err => console.log(err));
 
-// app.use('/posts', postsRoutes);
+app.use('/posts', postsRoutes);
 app.use('/api', apiRoutes)
 
 const PORT = process.env.PORT || 5000;

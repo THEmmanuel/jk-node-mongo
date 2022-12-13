@@ -13,9 +13,9 @@ router.post('/', async (req, res) => {
 			throw Error('an error occured')
 		}
 		res.status(200).json(post);
-	} catch {
+	} catch (err) {
 		res.status(400).json({
-			msg: error
+			msg: err
 		})
 	}
 })
@@ -28,7 +28,10 @@ router.get('/', async (req, res) => {
 		if (!posts) {
 			throw Error('No items!');
 		}
-		res.status(200).json(posts);
+		res.status(200).json({
+			testing: 'test',
+			posts
+		});
 	} catch (err) {
 		res.status(400).json({
 			msg: err
@@ -79,10 +82,10 @@ router.delete('/:id', async (req, res) => {
 		res.status(200).json({
 			success: true
 		})
-	}
-
-	catch(err){
-		res.status(400).json({msg: error})
+	} catch (err) {
+		res.status(400).json({
+			msg: error
+		})
 	}
 })
 

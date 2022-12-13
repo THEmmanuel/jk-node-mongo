@@ -1,4 +1,6 @@
-const { default: mongoose } = require('mongoose');
+const {
+	default: mongoose
+} = require('mongoose');
 
 const contactSchema = mongoose.Schema({
 	name: {
@@ -17,4 +19,7 @@ const contactSchema = mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('contact', contactSchema);
+const Contact = module.exports = mongoose.model('contact', contactSchema);
+module.exports.get = function (callback, limit) {
+    Contact.find(callback).limit(limit);
+}
